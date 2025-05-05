@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reloj Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .clock {
+      font-size: 6em;
+      color: #00ffe7;
+      text-shadow: 0 0 20px rgba(0, 255, 231, 0.7), 0 0 40px rgba(0, 255, 231, 0.5);
+      transition: all 0.3s ease;
+      padding: 20px 40px;
+      border: 3px solid #00ffe7;
+      border-radius: 15px;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="clock" id="clock">Cargando...</div>
+  <script>
+    function fetchTime() {
+      fetch('reloj.php')
+        .then(response => response.text())
+        .then(time => {
+          document.getElementById('clock').textContent = time;
+        })
+        .catch(error => {
+          console.error('Error al obtener la hora:', error);
+          document.getElementById('clock').textContent = 'Error';
+        });
+    }
+
+    setInterval(fetchTime, 1000);
+    fetchTime();
+  </script>
+</body>
+</html>
